@@ -26,7 +26,7 @@ import psutil
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.optim import AdamW
+from torch.optim import Over9000
 from torch.utils.data.distributed import DistributedSampler
 from torch.utils.data import RandomSampler, BatchSampler, DataLoader
 
@@ -131,7 +131,7 @@ class Distiller:
         ]
         logger.info("------ Number of trainable parameters (student): %i" % sum([p.numel() for p in self.student.parameters() if p.requires_grad]))
         logger.info("------ Number of parameters (student): %i" % sum([p.numel() for p in self.student.parameters()]))
-        self.optimizer = AdamW(optimizer_grouped_parameters,
+        self.optimizer = Over9000(optimizer_grouped_parameters,
                                lr=params.learning_rate,
                                eps=params.adam_epsilon,
                                betas=(0.9, 0.98))

@@ -42,7 +42,7 @@ from transformers import (WEIGHTS_NAME,
                           XLMConfig, XLMForSequenceClassification, XLMTokenizer,
                           DistilBertConfig, DistilBertForSequenceClassification, DistilBertTokenizer)
 
-from transformers import AdamW, get_linear_schedule_with_warmup
+from transformers import Over9000, get_linear_schedule_with_warmup
 
 from transformers import xnli_compute_metrics as compute_metrics
 from transformers import xnli_output_modes as output_modes
@@ -90,7 +90,7 @@ def train(args, train_dataset, model, tokenizer):
         {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)], 'weight_decay': args.weight_decay},
         {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
         ]
-    optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
+    optimizer = Over9000(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
     scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=args.warmup_steps, num_training_steps=t_total)
     if args.fp16:
         try:
